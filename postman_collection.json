@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "Student Management System API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000/api" },
+    { "key": "student_id", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "1. Create - Valid",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Asha\",\n  \"last_name\": \"Rao\",\n  \"email\": \"asha.rao@example.com\",\n  \"phone\": \"+919876543210\",\n  \"course\": \"B.Sc Computer Science\",\n  \"enrollment_date\": \"2024-07-01\",\n  \"gpa\": 3.8\n}"
+        },
+        "url": { "raw": "{{base_url}}/students/", "host": ["{{base_url}}"], "path": ["students", ""] }
+      }
+    },
+    {
+      "name": "2. Create - Missing Required Field",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"last_name\": \"Rao\",\n  \"email\": \"missing.first@example.com\",\n  \"phone\": \"+919876543211\",\n  \"course\": \"B.Sc\",\n  \"enrollment_date\": \"2024-07-01\",\n  \"gpa\": 3.0\n}"
+        },
+        "url": { "raw": "{{base_url}}/students/", "host": ["{{base_url}}"], "path": ["students", ""] }
+      }
+    },
+    {
+      "name": "3. Create - Duplicate Email",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Duplicate\",\n  \"last_name\": \"Test\",\n  \"email\": \"asha.rao@example.com\",\n  \"phone\": \"+919876543212\",\n  \"course\": \"B.Sc\",\n  \"enrollment_date\": \"2024-07-01\",\n  \"gpa\": 3.0\n}"
+        },
+        "url": { "raw": "{{base_url}}/students/", "host": ["{{base_url}}"], "path": ["students", ""] }
+      }
+    },
+    {
+      "name": "4. Create - Invalid GPA",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Bad\",\n  \"last_name\": \"Gpa\",\n  \"email\": \"bad.gpa@example.com\",\n  \"phone\": \"+919876543213\",\n  \"course\": \"B.Sc\",\n  \"enrollment_date\": \"2024-07-01\",\n  \"gpa\": 9.5\n}"
+        },
+        "url": { "raw": "{{base_url}}/students/", "host": ["{{base_url}}"], "path": ["students", ""] }
+      }
+    },
+    {
+      "name": "5. Read All",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/students/", "host": ["{{base_url}}"], "path": ["students", ""] }
+      }
+    },
+    {
+      "name": "6. Read One - Valid ID",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/students/{{student_id}}/", "host": ["{{base_url}}"], "path": ["students", "{{student_id}}", ""] }
+      }
+    },
+    {
+      "name": "7. Read One - Invalid ID",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/students/999999/", "host": ["{{base_url}}"], "path": ["students", "999999", ""] }
+      }
+    },
+    {
+      "name": "8. Update - Valid ID",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"gpa\": 3.95\n}"
+        },
+        "url": { "raw": "{{base_url}}/students/{{student_id}}/", "host": ["{{base_url}}"], "path": ["students", "{{student_id}}", ""] }
+      }
+    },
+    {
+      "name": "9. Update - Invalid ID",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"gpa\": 3.5\n}"
+        },
+        "url": { "raw": "{{base_url}}/students/999999/", "host": ["{{base_url}}"], "path": ["students", "999999", ""] }
+      }
+    },
+    {
+      "name": "10. Delete - Valid ID",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{base_url}}/students/{{student_id}}/", "host": ["{{base_url}}"], "path": ["students", "{{student_id}}", ""] }
+      }
+    },
+    {
+      "name": "11. Delete - Invalid ID",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{base_url}}/students/999999/", "host": ["{{base_url}}"], "path": ["students", "999999", ""] }
+      }
+    }
+  ]
+}
